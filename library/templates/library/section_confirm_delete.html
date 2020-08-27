@@ -1,0 +1,18 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+    Delete Section
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ section.get_delete_url }}"
+        method='post'>
+        {% csrf_token %}
+        <p>
+            Are you sure that you want to delete the section {{ section }} ?
+        </p>
+        <a href="{{ section.get_absolute_url }}" class="button">Cancel</a>
+        <button type="submit">Delete Section</button>
+    </form>
+{% endblock %}

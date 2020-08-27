@@ -1,0 +1,77 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+    Author - {{ author }}
+{% endblock %}
+
+{% block content %}
+      <article>
+          <div class="row">
+             <div class="offset-by-two eight columns">
+                 <h4 class="margin-tb-10px">{{ author }}</h4>
+                    <ul class="inline">
+                        {% if perms.library.change_author %}
+                        <li>
+                          <a
+                              href="{{ author.get_update_url }}"
+                              class="button">
+                            Edit Author</a></li>
+                        {% endif %}
+
+                        {% if perms.library.delete_author %}
+                        <li>
+                          <a
+                              href="{{ author.get_delete_url }}"
+                              class="button">
+                            Delete Author</a></li>
+                        {% endif %}
+                    </ul>
+
+                <section>
+                    <table>
+                        <tr>
+                            <th>First Name:</th>
+                            <td>{{ author.first_name }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Last Name:</th>
+                            <td>{{ author.last_name }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Date of Birth:</th>
+                            <td>{{ author.date_of_birth }}</td>
+                        </tr>
+
+                        <tr>
+                        {% if author.date_of_death is None %}
+                                <th>Date of Death:</th>
+                                <td>-</td>
+                        {% else %}
+                                <th>Date of Death:</th>
+                                <td>{{ author.date_of_death }}</td>
+                        {% endif %}
+
+                        </tr>
+                    </table>
+
+                </section>
+
+                <section>
+                    <h4>Books</h4>
+                    <ul>
+                        {% for book in book_list %}
+                            <li>
+                                <a href="{{ book.get_absolute_url }}">{{ book }}</a>
+                            </li>
+                        {% empty %}
+                            <li><em>There are currently no books for this Author.</em></li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+             </div>
+          </div>
+      </article>
+{% endblock %}

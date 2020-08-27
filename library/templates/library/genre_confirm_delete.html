@@ -1,0 +1,18 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+    Delete Genre
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ genre.get_delete_url }}"
+        method='post'>
+        {% csrf_token %}
+        <p>
+            Are you sure that you want to delete the Genre {{ genre }} ?
+        </p>
+        <a href="{{ author.get_absolute_url }}" class="button">Cancel</a>
+        <button type="submit">Delete Genre</button>
+    </form>
+{% endblock %}

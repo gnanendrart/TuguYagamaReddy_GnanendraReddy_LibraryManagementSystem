@@ -1,0 +1,39 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+    Book List
+{% endblock %}
+
+
+{% block create_button %}
+    {% if perms.library.add_book %}
+     <a
+        href="{% url 'library_book_create_urlpattern'  %}"
+        class="button button-primary add-button">
+      <i class="material-icons" style="font-size: 12px">add_circle</i> <span style="font-size: 12px">
+         Create New Book</span></a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+  <h3>Book List</h3>
+    {% if perms.library.add_book %}
+    <div class="mobile">
+      <a
+          href="{% url 'library_book_create_urlpattern' %}"
+          class="button button-primary">
+        Create New Book</a>
+    </div>
+    {% endif %}
+
+    <ul class="list">
+      {% for book in book_list %}
+        <li>
+            <a href="{{ book.get_absolute_url }}"> {{ book }}</a>
+        </li>
+      {% empty %}
+        <p>There are no books in the library.</p>
+      {% endfor %}
+
+    </ul>
+{% endblock %}

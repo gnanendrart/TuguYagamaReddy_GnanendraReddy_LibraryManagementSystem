@@ -1,0 +1,15 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+    Create Book
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{% url 'library_book_create_urlpattern' %}"
+        method='post'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Book</button>
+    </form>
+{% endblock %}

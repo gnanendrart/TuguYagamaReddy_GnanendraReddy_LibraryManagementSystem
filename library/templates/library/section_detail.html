@@ -1,0 +1,45 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+    Section - {{ section }}
+{% endblock %}
+
+{% block content %}
+<article>
+        <div class="row">
+            <div class="offset-by-two eight columns">
+                 <h4 class="margin-tb-10px">{{ section }}</h4>
+                    <ul class="inline">
+                        {% if perms.library.change_section %}
+                        <li>
+                          <a
+                              href="{{ section.get_update_url }}"
+                              class="button">
+                            Edit Section</a></li>
+                        {% endif %}
+
+                        {% if perms.library.delete_section %}
+                        <li>
+                          <a
+                              href="{{ section.get_delete_url }}"
+                              class="button">
+                            Delete Section</a></li>
+                        {% endif %}
+                    </ul>
+
+                    <section>
+                        <table>
+
+                            <tr>
+                                <th>Book:</th>
+                                <td><a href="{{ book.get_absolute_url }}">{{ book }}</a></td>
+                            </tr>
+
+                            <tr>
+                                <th>Genre:</th>
+                                <td><a href="{{ genre.get_absolute_url }}">{{ genre }}</a></td>
+                            </tr>
+
+                        </table>
+                    </section>
+{% endblock %}

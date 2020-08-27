@@ -1,0 +1,169 @@
+{% load staticfiles %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            Title is Provided By Inheriting Templates
+        {% endblock %}
+    </title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--[if IE]><script
+      src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
+    </script><![endif]-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'library/normalize.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'library/skeleton.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'library/style.css' %}"><![endif]-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+
+    <header class = 'row '>
+        <div class="margin-l-r-5px">
+            <div class="logo logo-dim"></div>
+            <div class="header-text">Library Management System</div>
+    <div class="float-right login-out">
+
+        {% if user.is_authenticated %}
+            <div class="">
+
+                <a href="{% url 'logout_urlpattern' %}" title="Click to Logout" style="text-decoration: none">
+                    <i class="material-icons logout-icon">person</i>
+                    <div class="color-white">{{ user.get_username|upper }}</div></a></div>
+        {% else %}
+            <div class="button"><a style="color:#ffffff" href="{% url 'login_urlpattern' %}">
+                Log In</a></div>
+        {% endif %}
+    </div>
+
+        </div>
+    <div class="nav">
+            <a href="{% url 'index_urlpattern' %}">
+                Index</a></li>
+
+
+            {% if perms.library.view_book %}
+                <a href="{% url 'library_book_list_urlpattern' %}">
+                    Books</a></li>
+            {% endif %}
+
+            {% if perms.library.view_author %}
+                <a href="{% url 'library_author_list_urlpattern' %}">
+                    Authors</a></li>
+            {% endif %}
+
+            {% if perms.library.view_member %}
+                <a href="{% url 'library_member_list_urlpattern' %}">
+                    Members</a></li>
+            {% endif %}
+
+            {% if perms.library.view_section %}
+                <a href="{% url 'library_section_list_urlpattern' %}">
+                    Sections</a></li>
+            {% endif %}
+
+            {% if perms.library.view_genre %}
+                <a href="{% url 'library_genre_list_urlpattern' %}">
+                    Genres</a></li>
+            {% endif %}
+
+            {% if perms.library.view_publisher %}
+                <a href="{% url 'library_publisher_list_urlpattern' %}">
+                    Publishers</a></li>
+            {% endif %}
+
+        </div>
+    </header>
+<div class="container-img">
+    <div class="container"><!-- start of container -->
+    <main>
+        {% block content %}
+            <div class="row background-img">
+                <section class="eight columns padding-10px">
+                    {% block org_content %}
+                        This is default content!
+                    {% endblock %}
+                </section>
+                <section class="desktop four columns">
+                    {% block create_button %}{% endblock %}
+                </section>
+                {% if is_paginated %}
+        <div class="row">
+            <div class="eight columns">
+                <ul class="pagination list">
+                    {% if first_page_url %}
+                        <li>
+                            <a href="{{ first_page_url }}">
+                                First</a>
+                        </li>
+                    {% endif %}
+                    {% if previous_page_url %}
+                        <li>
+                            <a href="{{ previous_page_url }}">
+                                Previous</a>
+                        </li>
+                    {% endif %}
+                    <li>
+                        Page {{ page_obj.number }}
+                        of {{ paginator.num_pages }}
+                    </li>
+                    {% if next_page_url %}
+                        <li>
+                            <a href="{{ next_page_url }}">
+                                Next</a>
+                        </li>
+                    {% endif %}
+                    {% if last_page_url %}
+                        <li>
+                            <a href="{{ last_page_url }}">
+                                Last</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+            </div>
+            <div class="row">
+                <div class="twelve columns">
+                    {% block content_footer %}{% endblock %}
+                </div>
+            </div>
+        {% endblock %}
+    </main>
+
+<!-- end of container -->
+</div>
+</div>
+
+
+<footer>
+    <p>
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0"
+                 src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"/>
+        </a><br/><span property="dct:title">Online Library Management System code</span>
+        is licensed under a
+        <a class="color-white" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike
+            4.0 International License</a>.
+    </p>
+    <p>Portions of the Online Library ManagementSystem code are based upon code from
+        <a  class="color-white" href="https://django-unleashed.com">Django Unleashed</a>,
+        <a  class="color-white" href="http://getskeleton.com/">Skeleton</a>, and
+        <a  class="color-white" href="https://necolas.github.io/normalize.css/">Normalize.css</a> and
+        are subject to the intellectual property rights restrictions of those works.
+    </p>
+</footer>
+
+</body>
+</html>

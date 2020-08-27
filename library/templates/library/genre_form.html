@@ -1,0 +1,15 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+    Create Genre
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{% url 'library_genre_create_urlpattern' %}"
+        method='post'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Genre</button>
+    </form>
+{% endblock %}

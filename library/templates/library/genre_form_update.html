@@ -1,0 +1,15 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+    Update Genre
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ genre.get_update_url  }}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update Genre</button>
+    </form>
+{% endblock %}

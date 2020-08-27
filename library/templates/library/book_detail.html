@@ -1,0 +1,71 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+    Book - {{ book }}
+{% endblock %}
+
+{% block content %}
+    <article>
+        <div class="row">
+            <div class="offset-by-two eight columns">
+                 <h4 class="margin-tb-10px">{{ book }}</h4>
+                    <ul class="inline">
+                        {% if perms.library.change_book %}
+                        <li>
+                          <a
+                              href="{{ book.get_update_url }}"
+                              class="button">
+                            Edit Book</a></li>
+                        {% endif %}
+
+                        {% if perms.library.delete_book %}
+                        <li>
+                          <a
+                              href="{{ book.get_delete_url }}"
+                              class="button">
+                            Delete Book</a></li>
+                        {% endif %}
+                    </ul>
+
+                        <section>
+                            <table>
+                                <tr>
+                                    <th>Book Name:</th>
+                                    <td>{{ book.book_name }}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Language:</th>
+                                    <td>{{ book.language }}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Author:</th>
+                                    <td><a href="{{ author.get_absolute_url }}">{{ author }}</a></td>
+                                </tr>
+                                <tr>
+                                    <th>Publisher:</th>
+                                    <td><a href="{{ publisher.get_absolute_url }}">{{ publisher }}</a></td>
+                                </tr>
+                            </table>
+
+                        </section>
+
+                        <section>
+                            <h4>Sections</h4>
+                            <ul>
+                                {% for section in section_list %}
+                                    <li>
+                                        <a href="{{ section.get_absolute_url }}">{{ section }}</a>
+                                    </li>
+                                {% empty %}
+                                    <li><em>There are currently no sections for this Author.</em></li>
+                                {% endfor %}
+                            </ul>
+                        </section>
+
+            </div>
+        </div>
+    </article>
+
+{% endblock %}

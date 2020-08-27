@@ -1,0 +1,24 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+    Error Deleting Author
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Author</h2>
+        <p>
+            You may not delete the author {{ author }}. This
+            author has written the following books
+        </p>
+
+        <ul>
+            {% for book in books %}
+             <li><a href="{{ book.get_absolute_url }}">{{ book }}</a></li>
+            {% endfor %}
+        </ul>
+        <p>
+            Return to <a href="{% url 'library_author_list_urlpattern' %}" class="button">Author List</a>
+        </p>
+    </div>
+{% endblock %}

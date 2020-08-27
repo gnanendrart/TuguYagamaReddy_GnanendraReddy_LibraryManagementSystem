@@ -1,0 +1,25 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+    Error Deleting Genre
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Genre</h2>
+        <p>
+            You may not delete the genre {{ genre }}. This
+            genre is currently belongs to following
+            sections
+        </p>
+
+        <ul>
+            {% for section in sections %}
+             <li><a href="{{ section.get_absolute_url }}">{{ section }}</a></li>
+            {% endfor %}
+        </ul>
+        <p>
+            Return to <a href="{% url 'library_genre_list_urlpattern' %}" class="button">Genre List</a>
+        </p>
+    </div>
+{% endblock %}

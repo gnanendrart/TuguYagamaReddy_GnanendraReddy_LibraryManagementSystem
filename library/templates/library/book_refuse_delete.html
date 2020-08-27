@@ -1,0 +1,32 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+    Error Deleting Book
+{% endblock %}
+
+{% block content %}
+    <div>
+
+        <h2>Error Deleting Book</h2>
+        <ul>
+            {% if sections %}
+                <p>
+                    You cannot delete the book {{ book }}. This
+                    book is currently present in the following
+                    sections:
+                </p>
+
+                <ul>
+                {% for section in sections %}
+                    <li><a href="{{ section.get_absolute_url }}">{{ section }}</a></li>
+                {% endfor %}
+                </ul>
+
+            {% endif %}
+        </ul>
+
+        <p>
+            Return to <a href="{% url 'library_book_list_urlpattern' %}" class="button">Books List</a>
+        </p>
+    </div>
+{% endblock %}

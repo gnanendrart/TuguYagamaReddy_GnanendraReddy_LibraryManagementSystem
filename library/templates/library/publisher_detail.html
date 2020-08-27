@@ -1,0 +1,56 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+    Publisher - {{ publisher }}
+{% endblock %}
+
+{% block content %}
+    <article>
+        <div class="row">
+            <div class="offset-by-two eight columns">
+                 <h4 class="margin-tb-10px">{{ publisher }}</h4>
+                    <ul class="inline">
+                        {% if perms.library.change_publisher %}
+                        <li>
+                          <a
+                              href="{{ publisher.get_update_url }}"
+                              class="button">
+                            Edit Publisher</a></li>
+                        {% endif %}
+
+                        {% if perms.library.delete_publisher %}
+                        <li>
+                          <a
+                              href="{{ publisher.get_delete_url }}"
+                              class="button">
+                            Delete Publisher</a></li>
+                        {% endif %}
+                    </ul>
+
+                    <section>
+                        <table>
+
+                            <tr>
+                                <th>Publisher:</th>
+                                <td>{{ publisher.publisher_name }}</td>
+                            </tr>
+
+                        </table>
+                    </section>
+
+                    <section>
+                        <h4>Books</h4>
+                        <ul>
+                            {% for book in book_list %}
+                                <li>
+                                    <a href="{{ book.get_absolute_url }}">{{ book }}</a>
+                                </li>
+                            {% empty %}
+                                <li><em>There are currently no books for this Publisher.</em></li>
+                            {% endfor %}
+                        </ul>
+                    </section>
+            </div>
+        </div>
+    </article>
+{% endblock %}

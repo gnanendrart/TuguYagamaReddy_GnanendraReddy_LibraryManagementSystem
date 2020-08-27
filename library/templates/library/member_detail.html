@@ -1,0 +1,48 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+    Member - {{ member }}
+{% endblock %}
+
+{% block content %}
+    <article>
+        <div class="row">
+            <div class="offset-by-two eight columns">
+                 <h4 class="margin-tb-10px">{{ member }}</h4>
+                    <ul class="inline">
+                        {% if perms.library.change_member %}
+                        <li>
+                          <a
+                              href="{{ member.get_update_url }}"
+                              class="button">
+                            Edit Member</a></li>
+                        {% endif %}
+
+                        {% if perms.library.delete_member %}
+                        <li>
+                          <a
+                              href="{{ member.get_delete_url }}"
+                              class="button">
+                            Delete Member</a></li>
+                        {% endif %}
+                    </ul>
+                    <section>
+                        <table>
+                            <tr>
+                                <th>First Name:</th>
+                                <td>{{ member.first_name }}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Last Name:</th>
+                                <td>{{ member.last_name }}</td>
+                            </tr>
+
+                        </table>
+
+                    </section>
+            </div>
+        </div>
+    </article>
+    
+{% endblock %}

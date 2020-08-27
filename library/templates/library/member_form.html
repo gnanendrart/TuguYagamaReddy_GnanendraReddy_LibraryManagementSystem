@@ -1,0 +1,15 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+    Create Member
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{% url 'library_member_create_urlpattern' %}"
+        method='post'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Member</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+    Update Section
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ section.get_update_url  }}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update Section</button>
+    </form>
+{% endblock %}

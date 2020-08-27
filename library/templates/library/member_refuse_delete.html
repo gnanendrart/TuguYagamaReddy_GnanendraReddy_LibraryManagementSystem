@@ -1,0 +1,17 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+    Error Deleting Member
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Member</h2>
+        <p>
+            You may not delete the member {{ member }}.
+        </p>
+        <p>
+            Return to <a href="{% url 'library_member_list_urlpattern' %}" class="button">Member List</a>
+        </p>
+    </div>
+{% endblock %}

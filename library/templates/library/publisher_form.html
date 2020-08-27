@@ -1,0 +1,15 @@
+{% extends 'library/base.html' %}
+
+{% block title %}
+    Create Publisher
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{% url 'library_publisher_create_urlpattern' %}"
+        method='post'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Publisher</button>
+    </form>
+{% endblock %}
